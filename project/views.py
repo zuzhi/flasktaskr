@@ -30,8 +30,8 @@ def login_required(test):
             return redirect(url_for('login'))
     return wrap
 
-# route handlers
 
+# route handlers
 
 @app.route('/logout/')
 def logout():
