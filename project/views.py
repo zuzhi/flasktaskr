@@ -1,22 +1,25 @@
 # project/views.py
 
+###########
+# imports #
+###########
+
+from forms import AddTaskForm, RegisterForm, LoginForm
 
 from functools import wraps
-
 from flask import Flask, flash, redirect, render_template, \
-    request, session, url_for, g
-
-from forms import AddTaskForm
-
+    request, session, url_for
 from flask_sqlalchemy import SQLAlchemy
 
-# config
+##########
+# config #
+##########
 
 app = Flask(__name__)
 app.config.from_object('_config')
 db = SQLAlchemy(app)
 
-from models import Task
+from models import Task, User
 
 # helper functions
 
@@ -43,16 +46,20 @@ def logout():
 
 @app.route('/', methods=['GET', 'POST'])
 def login():
+    error = None
+    form = LoginForm(request.form)
     if request.method == 'POST':
-        if request.form['username'] != app.config['USERNAME'] \
-                or request.form['password'] != app.config['PASSWORD']:
-            error = 'Invalid Credentials. Please try again.'
-            return render_template('login.html', error=error)
+        if form.validate_on_submit():
+            user = User.query.filter_by(name=request.form['name']).first()
+            if user is not None and user.password == request.form['password']:
+                session['logged_in'] = True
+                flash('Welcome!')
+                return redirect(url_for('tasks'))
+            else:
+                error = 'Invalid username or password'
         else:
-            session['logged_in'] = True
-            flash('Welcome!')
-            return redirect(url_for('tasks'))
-    return render_template('login.html')
+            error = 'Both fields are required.'
+    return render_template('login.html', form=form, error=error)
 
 
 @app.route('/tasks/')
@@ -108,3 +115,21 @@ def delete_entry(task_id):
     db.session.commit()
     flash("The task was deleted, Why not add a new one?")
     return redirect(url_for('tasks'))
+
+
+@app.route('/register/', methods=['GET', 'POST'])
+def register():
+    error = None
+    form = RegisterForm(request.form)
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            new_user = User(
+                form.name.data,
+                form.email.data,
+                form.password.data,
+            )
+            db.session.add(new_user)
+            db.session.commit()
+            flash("Thanks for registering. Please login.")
+            return redirect(url_for('login'))
+    return render_template('register.html', form=form, error=error)
