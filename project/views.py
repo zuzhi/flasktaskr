@@ -41,6 +41,7 @@ def login_required(test):
 @app.route('/logout/')
 def logout():
     session.pop('logged_in', None)
+    session.pop('user_id', None)
     flash('Goodbye!')
     return redirect(url_for('login'))
 
@@ -54,6 +55,7 @@ def login():
             user = User.query.filter_by(name=request.form['name']).first()
             if user is not None and user.password == request.form['password']:
                 session['logged_in'] = True
+                session['user_id'] = user.id
                 flash('Welcome!')
                 return redirect(url_for('tasks'))
             else:
@@ -90,7 +92,7 @@ def new_task():
                 form.priority.data,
                 datetime.datetime.utcnow(),
                 '1',
-                '1'
+                session['user_id']
             )
             db.session.add(new_task)
             db.session.commit()
