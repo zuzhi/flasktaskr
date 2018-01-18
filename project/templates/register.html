@@ -3,33 +3,59 @@
 
   <h1>Welcome to FlaskTaskr.</h1>
   <h3>Please register to access the task list.</h3>
-  <form method="POST" action="">
-    {{ form.csrf_token }}
-    <div>
-      {{ form.name.label }}
-      {{ form.name }}
-    </div>
-    <div>
-      {{ form.email.label }}
-      {{ form.email}}
-    </div>
-    <div>
-      {{ form.password.label }}
-      {{ form.password}}
-    </div>
-    <div>
-      {{ form.confirm.label }}
-      {{ form.confirm}}
-    </div>
-    <div>
-      <button type="submit">Submit</button>
-    </div>
-  </form>
+  <div class="half-width">
+    <form method="POST" action="">
+      {{ form.csrf_token }}
+      <div class="input-group">
+        {{ form.name(placeholder="name") }}
+        {% if form.name.errors %}
+          <span class="error">
+            {% for error in form.name.errors %}
+              {{error}}
+            {% endfor %}
+          </span>
+        {% endif %}
+      </div>
+      <div class="input-group">
+        {{ form.email(placeholder="email")}}
+        {% if form.email.errors %}
+          <span class="error">
+            {% for error in form.email.errors %}
+              {{error}}
+            {% endfor %}
+          </span>
+        {% endif %}
+      </div>
+      <div class="input-group">
+        {{ form.password(placeholder="password")}}
+        {% if form.password.errors %}
+          <span class="error">
+            {% for error in form.password.errors %}
+              {{error}}
+            {% endfor %}
+          </span>
+        {% endif %}
+      </div>
+      <div class="input-group">
+        {{ form.confirm(placeholder="confirm password") }}
+        {% if form.confirm.errors %}
+          <span class="error">
+            {% for error in form.confirm.errors %}
+              {{error}}
+            {% endfor %}
+          </span>
+        {% endif %}
+      </div>
+      <div class="input-group">
+        <button class="button" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
 
   <br>
 
   <div class="">
-    <p><em>Already registered?</em> Click <a href="/">here</a> to login.</p>
+    <em>Already registered?</em> Click <a href="/">here</a> to login.
   </div>
 
 {% endblock %}
