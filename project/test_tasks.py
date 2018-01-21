@@ -41,6 +41,14 @@ class AllTests(unittest.TestCase):
             password=password
         ), follow_redirects=True)
 
+    def register(self, name, email, password, confirm):
+        return self.app.post('register/', data=dict(
+            name=name,
+            email=email,
+            password=password,
+            confirm=confirm
+        ), follow_redirects=True)
+
     def logout(self):
         return self.app.get('logout/', follow_redirects=True)
 
