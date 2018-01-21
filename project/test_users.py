@@ -115,6 +115,15 @@ class AllTests(unittest.TestCase):
         response = self.logout()
         self.assertNotIn(b'Goodbye!', response.data)
 
+    def test_default_user_role(self):
+        db.session.add(User('arthur', 'arthur@inception.com', 'arthur'))
+        db.session.commit()
+
+        users = db.session.query(User).all()
+        print(users)
+        for user in users:
+            self.assertEquals(user.role, 'user')
+
 
 if __name__ == "__main__":
     unittest.main()

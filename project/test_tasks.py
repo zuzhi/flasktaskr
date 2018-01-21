@@ -66,6 +66,16 @@ class AllTests(unittest.TestCase):
             status='1'
         ), follow_redirects=True)
 
+    def create_admin_user(self):
+        new_user = User(
+            name='nolan',
+            email='nolan@inception.com',
+            password='nolan',
+            role='admin'
+        )
+        db.session.add(new_user)
+        db.session.commit()
+
     ###############
     #    tests    #
     ###############
@@ -129,6 +139,48 @@ class AllTests(unittest.TestCase):
         self.app.get('tasks/', follow_redirects=True)
         response = self.app.get('complete/1/', follow_redirects=True)
         self.assertNotIn(b'The task is complete. Nice.', response.data)
+        self.assertIn(b'You can only complete tasks that belong to you.',
+                      response.data)
+
+    def test_users_cannot_delete_tasks_that_are_not_created_by_them(self):
+        self.create_user('arthur', 'arthur@inception.com', 'arthur')
+        self.login('arthur', 'arthur')
+        self.app.get('tasks/', follow_redirects=True)
+        self.create_task()
+        self.logout()
+        self.create_user('ariadne', 'ariadne@inception.com', 'ariadne')
+        self.login('ariadne', 'ariadne')
+        self.app.get('tasks/', follow_redirects=True)
+        response = self.app.get('delete/1/', follow_redirects=True)
+        self.assertNotIn(b'The task is complete. Nice.', response.data)
+        self.assertIn(b'You can only delete tasks that belong to you.',
+                      response.data)
+
+    def test_admin_users_can_complete_tasks_that_are_not_created_by_them(self):
+        self.create_user('arthur', 'arthur@inception.com', 'arthur')
+        self.login('arthur', 'arthur')
+        self.app.get('tasks/', follow_redirects=True)
+        self.create_task()
+        self.logout()
+        self.create_admin_user()
+        self.login('nolan', 'nolan')
+        self.app.get('tasks/', follow_redirects=True)
+        response = self.app.get('complete/1/', follow_redirects=True)
+        self.assertNotIn(b'You can only complete tasks that belong to you.',
+                         response.data)
+
+    def test_admin_users_can_delete_tasks_that_are_not_created_by_them(self):
+        self.create_user('arthur', 'arthur@inception.com', 'arthur')
+        self.login('arthur', 'arthur')
+        self.app.get('tasks/', follow_redirects=True)
+        self.create_task()
+        self.logout()
+        self.create_admin_user()
+        self.login('nolan', 'nolan')
+        self.app.get('tasks/', follow_redirects=True)
+        response = self.app.get('delete/1/', follow_redirects=True)
+        self.assertNotIn(b'You can only delete tasks that belong to you.',
+                         response.data)
 
 
 if __name__ == "__main__":
