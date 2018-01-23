@@ -3,17 +3,17 @@
 
 <h1>Welcome to FlaskTaskr</h1>
 <br>
-<a href="{{ url_for('logout') }}">Logout</a>
+<a href="{{ url_for('users.logout') }}">Logout</a>
 <div class="add-task">
   <h3>Add a new task:</h3>
-  <form action="{{ url_for('new_task') }}" method="post" class="inline-form">
+  <form action="{{ url_for('tasks.new_task') }}" method="post" class="inline-form">
     {{ form.csrf_token }}
     <div class="input-group">
       {{ form.name(placeholder="name") }}
       {% if form.name.errors %}
         <div class="error">
           {% for error in form.name.errors %}
-            {{error}}
+            {{ error }}
           {% endfor %}
         </div>
       {% endif %}
@@ -23,7 +23,7 @@
       {% if form.due_date.errors %}
         <div class="error">
           {% for error in form.due_date.errors %}
-            {{error}}
+            {{ error }}
           {% endfor %}
         </div>
       {% endif %}
@@ -33,7 +33,7 @@
       {% if form.priority.errors %}
         <div class="error">
           {% for error in form.priority.errors %}
-            {{error}}
+            {{ error }}
           {% endfor %}
         </div>
       {% endif %}
@@ -66,8 +66,8 @@
           <td width="50px">{{ task.priority }}</td>
           <td width="90px">{{ task.poster.name }}</td>
           <td>
-            <a href="{{ url_for('delete_entry', task_id = task.task_id) }}">Delete</a>  -
-            <a href="{{ url_for('complete', task_id = task.task_id) }}">Mark as Complete</a>
+            <a href="{{ url_for('tasks.delete_entry', task_id = task.task_id) }}">Delete</a>  -
+            <a href="{{ url_for('tasks.complete', task_id = task.task_id) }}">Mark as Complete</a>
           </td>
         </tr>
       {% endfor %}
@@ -98,12 +98,11 @@
           <td width="50px">{{ task.priority }}</td>
           <td width="90px">{{ task.poster.name }}</td>
           <td>
-             <a href="{{ url_for('delete_entry', task_id = task.task_id) }}">Delete</a>
+             <a href="{{ url_for('tasks.delete_entry', task_id = task.task_id) }}">Delete</a>
           </td>
         </tr>
       {% endfor %}
     </table>
   </div>
 </div>
-
 {% endblock %}
