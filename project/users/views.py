@@ -23,7 +23,6 @@ users_blueprint = Blueprint('users', __name__)
 #    helper functions    #
 ##########################
 
-
 def login_required(test):
     @wraps(test)
     def wrap(*args, **kwargs):

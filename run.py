@@ -1,4 +1,4 @@
-# project/run.py
+# run.py
 
 
 from project import app

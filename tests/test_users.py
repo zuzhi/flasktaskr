@@ -1,4 +1,4 @@
-# project/test_users.py
+# tests/test_users.py
 
 
 import os

@@ -1,4 +1,4 @@
-# project/db_migrate.py
+# db_migrate.py
 
 
 from views import db

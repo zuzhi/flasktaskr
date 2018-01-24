@@ -1,4 +1,4 @@
-# project/test_tasks.py
+# tests/test_tasks.py
 
 
 import os
