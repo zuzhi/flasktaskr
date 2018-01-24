@@ -3,7 +3,8 @@
 
 import os
 import unittest
-from project import app, db
+
+from project import app, db, bcrypt
 from project._config import basedir
 from project.models import User
 
@@ -56,7 +57,9 @@ class AllTests(unittest.TestCase):
     ###############
 
     def test_users_can_register(self):
-        new_user = User("arthur", "arthur@inception.com", "arthur")
+        new_user = User("arthur",
+                        "arthur@inception.com",
+                        bcrypt.generate_password_hash("arthur"))
         db.session.add(new_user)
         db.session.commit()
         test = db.session.query(User).all()
