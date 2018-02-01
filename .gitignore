@@ -6,4 +6,5 @@ __pycache__
 project/.coverage
 project/htmlcov
 .coverage
+cover
 error.log
