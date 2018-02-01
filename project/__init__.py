@@ -6,23 +6,27 @@ import datetime
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+from flask_restful import Api
 
 
 app = Flask(__name__)
 app.config.from_pyfile('_config.py')
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
+the_restful_api = Api(app)
 
 
 from project.users.views import users_blueprint
 from project.tasks.views import tasks_blueprint
 from project.api.views import api_blueprint
+from project.restful_api.views import restful_api_blueprint
 
 
 # register our blueprints
 app.register_blueprint(users_blueprint)
 app.register_blueprint(tasks_blueprint)
 app.register_blueprint(api_blueprint)
+app.register_blueprint(restful_api_blueprint)
 
 
 @app.errorhandler(404)

@@ -21,4 +21,4 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + DATABASE_PATH
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # the debug mode
-DEBUG = False
+DEBUG = True
