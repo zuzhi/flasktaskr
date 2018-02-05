@@ -13,4 +13,6 @@ deploy:
     secure: pMS9slJnUzCJ40pJ+sk5Rn9FPWNcfvWTHF6O5MujmUHd31j3RCUCMfHb3i0jXn/F0Bs1YNpJiwDZvAZhSATH6ljnP6t92UqzFGZMuh9Rjh/gByJANrvlnVkkMfg206DpyAkg6CDvdfIbijby4hLJQdQzd1+ewtYeY61hC6F9ePQNAC0Ir4JyqEAdUavNB/GNeKMQZjGg14PbfXC3PpIupSaD+Piw/i7133udy0GeK/ooobGyQkxhIy/JxJrl1RkjJs7ZQm0kpvxSY9TlKsI+tU9TzRhe00KvolIL9dzrZk7Y1M7+AyUFF7wMb2LhPMqBq4jPbe5mU6A/ULNK4JHfXzUKeNzMu3+53zCcrNOgOYsr7KEpq2OubEnGqo8vqCadJkK9ryB3tsB1sF2LCH4Z5Cq7LKtt/4i2Xsl7sWcILAoyg/+EcQL7IXUdq/jEtLblK9Lm6famntBBl5y6Cc6I2fDKwt6bmon1kiJQJa8bqNwvxSDdn0KNTla2NqmFeyCeSLC+W5oB/bG1yuq4X4RIOlZW8i8JDXgBpC9E1nkREjfS0VGM2KoT3YROqPIw3qf0VrwDUIUhdczu4kPIrLQT+5uIa5sOoPPvjtAMzQB1AwULfBnCTd6JrAkF5f3HfUUoHh0LYB/qEfBIvfGcYtjvI/ykllSik/mv3n39oWtFFMI=
   app: secure-brook-82894
   on:
+    branch: master
+    python: 3.6
     repo: zuzhi/flasktaskr
