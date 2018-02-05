@@ -3,7 +3,8 @@
 
 import datetime
 
-from flask import jsonify, Blueprint
+from functools import wraps
+from flask import jsonify, Blueprint, session
 from flask_restful import Resource, reqparse, abort, fields, marshal_with
 
 from project import db, the_restful_api
@@ -43,6 +44,16 @@ resource_fields = {
 }
 
 
+def login_required(test):
+    @wraps(test)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return test(*args, **kwargs)
+        else:
+            abort(401, message="Unauthorized")
+    return wrap
+
+
 class TaskDao(object):
     def __init__(self, task_id, name, due_date, priority, posted_date,
                  status, user_id):
@@ -77,8 +88,9 @@ class TaskAPI(Resource):
         return TaskDao(task_id=task.task_id, name=task.name,
                        due_date=task.due_date, priority=task.priority,
                        posted_date=task.posted_date, status=task.status,
-                       user_id=task.user_id)
+                       user_id=task.user_id), 200
 
+    @login_required
     def delete(self, task_id):
         abort_if_task_doesnt_exist(task_id)
         task = db.session.query(Task).filter_by(task_id=task_id)
@@ -88,6 +100,18 @@ class TaskAPI(Resource):
 
     # TODO Add PUT(update) method
     # TODO Change to only allow logged in users to update and delete task
+    @login_required
+    @marshal_with(resource_fields)
+    def patch(self, task_id):
+        abort_if_task_doesnt_exist(task_id)
+        task = db.session.query(Task).filter_by(task_id=task_id)
+        task.update({"status": "0"})
+        db.session.commit()
+        task = task.first()
+        return TaskDao(task_id=task.task_id, name=task.name,
+                       due_date=task.due_date, priority=task.priority,
+                       posted_date=task.posted_date, status=task.status,
+                       user_id=task.user_id), 200
 
 
 class TaskListAPI(Resource):

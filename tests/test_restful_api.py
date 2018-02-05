@@ -3,11 +3,12 @@
 
 import os
 import unittest
-from datetime import date
+from datetime import date, datetime
+from flask import session
 
-from project import app, db
+from project import app, db, bcrypt
 from project._config import basedir
-from project.models import Task
+from project.models import Task, User
 
 
 TEST_DB = 'test.db'
@@ -74,6 +75,19 @@ class APITests(unittest.TestCase):
             status='1'
         ), follow_redirects=True)
 
+    def create_user(self, name, email, password):
+        new_user = User(name=name,
+                        email=email,
+                        password=bcrypt.generate_password_hash(password))
+        db.session.add(new_user)
+        db.session.commit()
+
+    def login(self, name, password):
+        return self.app.post('/', data=dict(
+            name=name,
+            password=password
+        ), follow_redirects=True)
+
     ###############
     #    tests    #
     ###############
@@ -101,7 +115,50 @@ class APITests(unittest.TestCase):
         self.assertEquals(response.mimetype, 'application/json')
         self.assertIn(b'Task 209 doesn\'t exist', response.data)
 
-    # TODO Test create resource
+    def test_all_users_can_post_new_tasks(self):
+        response = self.app.post('api/v2/tasks/', data={
+            'name': 'a task',
+            'due_date': datetime.now().strftime('%m/%d/%Y'),
+            'priority': 9
+        })
+        self.assertEqual(response.status_code, 201)
+        self.assertIn(b'a task', response.data)
+        self.create_user('arthur', 'arthur@inception.com', 'arthur')
+        self.login('arthur', 'arthur')
+        response = self.app.post('api/v2/tasks/', data={
+            'name': 'another task',
+            'due_date': datetime.now().strftime('%m/%d/%Y'),
+            'priority': 9
+        })
+        self.assertEqual(response.status_code, 201)
+        self.assertIn(b'another task', response.data)
+
+    def test_logged_in_users_can_update_individual_task(self):
+        self.add_tasks()
+        response = self.app.patch('api/v2/tasks/1', follow_redirects=True)
+        self.assertEqual(response.status_code, 401)
+        self.assertIn(b'Unauthorized', response.data)
+        #
+        self.create_user('arthur', 'arthur@inception.com', 'arthur')
+        self.login('arthur', 'arthur')
+        self.add_tasks()
+        response = self.app.patch('api/v2/tasks/1', follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Run around in circles', response.data)
+        self.assertIn(b'"status": 0', response.data)
+
+    def test_logged_in_users_can_delete_individual_task(self):
+        self.add_tasks()
+        response = self.app.delete('api/v2/tasks/1', follow_redirects=True)
+        self.assertEqual(response.status_code, 401)
+        self.assertIn(b'Unauthorized', response.data)
+        #
+        self.create_user('arthur', 'arthur@inception.com', 'arthur')
+        self.login('arthur', 'arthur')
+        self.add_tasks()
+        response = self.app.delete('api/v2/tasks/1', follow_redirects=True)
+        self.assertEqual(response.status_code, 204)
+        self.assertIn(b'', response.data)
 
 
 if __name__ == "__main__":
