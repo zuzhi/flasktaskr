@@ -6,6 +6,7 @@ __pycache__
 *.DS_Store
 project/.coverage
 project/htmlcov
+project/test.db
 .coverage
 cover
 error.log
