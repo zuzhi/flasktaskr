@@ -21,7 +21,13 @@ def commit():
 
 
 def push():
-    local("git push origin master")
+    local("git branch")
+    try:
+        input = raw_input
+    except NameError:
+        pass
+    branch = input("Which branch do you want to push to?")
+    local("git push origin {}".format(branch))
 
 
 def prepare():
