@@ -1,39 +1,38 @@
 {% extends "_base.html" %}
 {% block content %}
 
-  <h1>Welcome to FlaskTaskr.</h1>
-  <h3>Please login to access your task list.</h3>
-  <div class="half-width">
+  <h2>Welcome to FlaskTaskr.</h2>
+  <h3 class="font-weight-normal">Please login to access your task list.</h3>
+  <!-- <div class="half-width"> -->
     <form method="post" action="/">
       {{ form.csrf_token }}
-      <div class="input-group">
-        {{ form.name(placeholder="name") }}
+      <div class="form-group">
+        {{ form.name(placeholder="name", class_="form-control col-md-3", id="name", required="required") }}
         {% if form.name.errors %}
-          <span class="error">
-            {% for error in form.name.errors %}
-              {{error}}
-            {% endfor %}
-          </span>
+        <div class="invalid-feedback">
+          {% for error in form.name.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
         {% endif %}
       </div>
-      <div class="input-group">
-        {{ form.password(placeholder="password") }}
+      <div class="form-group">
+        {{ form.password(placeholder="password", class_="form-control col-md-3", id="password", required="required") }}
         {% if form.password.errors %}
-          <span class="error">
-            {% for error in form.password.errors %}
-              {{error}}
-            {% endfor %}
-          </span>
+        <div class="invalid-feedback">
+          {% for error in form.password.errors %}
+            {{error}}
+          {% endfor %}
+        </div>
         {% endif %}
       </div>
       <div>
-        <button class="button" type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </div>
+      <small id="formHelpBlock" class="form-text text-muted">
+        <em>Need an account? </em><a href="/register">Signup.</a>
       </div>
     </form>
-  </div>
-
-  <div>
-    <em>Need an account? </em><a href="/register">Signup!!</a>
-  </div>
+  <!-- </div> -->
 
 {% endblock %}
