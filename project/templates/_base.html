@@ -20,16 +20,12 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="{{ url_for('users.login') }}">Login <span class="sr-only">(current)</span></a>
           </li>
           {% if not session.logged_in %}
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('users.register') }}">Signup</a>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('users.logout') }}">Signout</a>
           </li>
           {% endif %}
         </ul>
@@ -37,6 +33,7 @@
         <span class="navbar-text">
           Welcome, {{username}}.
         </span>
+        <a class="nav-link" href="{{ url_for('users.logout') }}">Signout</a>
         {% endif %}
       </div>
     </div>
