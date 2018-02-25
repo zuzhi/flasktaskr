@@ -66,7 +66,10 @@ def login():
                 return redirect(url_for('tasks.tasks'))
             else:
                 error = 'Invalid username or password.'
-    return render_template('login.html', form=form, error=error)
+    if 'logged_in' in session:
+        return redirect(url_for('tasks.tasks'))
+    else:
+        return render_template('login.html', form=form, error=error)
 
 
 @users_blueprint.route('/register/', methods=['GET', 'POST'])
