@@ -131,6 +131,12 @@ class AllTests(unittest.TestCase):
         for user in users:
             self.assertEquals(user.role, 'user')
 
+    def test_logged_in_users_get_redirected_to_tasks_page_from_root_page(self):
+        self.register('arthur', 'arthur@inception.com', 'arthur', 'arthur')
+        self.login('arthur', 'arthur')
+        response = self.app.get('/', follow_redirects=True)
+        self.assertIn(b'Open tasks', response.data)
+
 
 if __name__ == "__main__":
     unittest.main()
