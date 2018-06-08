@@ -11,7 +11,7 @@ deploy:
   provider: heroku
   api_key:
     secure: yzKaa1xQZkmiLIrrCD5ca3C/zfJKsPXKZoNy50UImy86SsA9BxHvKAy7hKYmVa/LY/lrE9ekU8bD8eIqlVaWZavbvi+wpjj7YKAPvYmy72pfwLdHK7N8dPMDOxJ3xsrA8k7SexAH8+UXiSXe84YN3doOFtms8uMKi1bafHsvMJtktIxoVPoE1YhacNoEmLNZYNhJZxlObmuA8+5uQK3fEnR2yPhgfo2BJ/8BxKWfZSRZ2IA4mxAu/n5J7WQ1Kqeym+UKP1Q97Vrq/hTxNzcBGO2R/PPRdyCAWzOny44CcLNTCDHb/Dh7zL5/5hs9va0thFaVWRsUDAezzsrE3SknGLkHKYE/KYDd5ERBLMxS5NQa96zDZJ75ovFE/EA6VafE6Np0zVU8c+5A23Mwet4B8PbMjmHU3/DTjTXEPaaZDJeSkO6NZtd7GAvcYZh3ZvGN0dkUmcVW5JHVuM0f6+W1IIa/GTUUa4oH8gawQT+qrfK9aiBY1AL9DKQUb8bzgjPb83QH6RcvXvGxp9Ci/dSbgrmQfIueV5O3L4iDGc/BuBqb27X4DWyOAtLWfY+SQCX2hkna2porYj7Syf+mhUDuDpqV5o2F5bVIXuVP0KfPgqerrmLVXEebcVaYyXKrghPq1TmlZUUwKYALtiB2IscCdV40pFNLIGORulr5l3KOU5c=
-  app: secure-brook-82894
+  app: zuzhi-flasktaskr
   on:
     branch: master
     python: 3.6
