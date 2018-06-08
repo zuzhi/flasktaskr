@@ -31,7 +31,7 @@
         </ul>
         {% if session.logged_in %}
         <span class="navbar-text">
-          Welcome, {{username}}.
+          Welcome, <span class="font-weight-bold">{{username}}</span>.
         </span>
         <a class="nav-link" href="{{ url_for('users.logout') }}">Sign out</a>
         {% endif %}
