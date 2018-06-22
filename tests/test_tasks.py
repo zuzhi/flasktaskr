@@ -91,7 +91,7 @@ class AllTests(unittest.TestCase):
         self.login('arthur', 'arthur')
         response = self.app.get('tasks/')
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Add a new task:', response.data)
+        self.assertIn(b'Create a new task', response.data)
 
     def test_not_logged_in_users_cannot_access_tasks_page(self):
         response = self.app.get('tasks/', follow_redirects=True)
