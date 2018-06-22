@@ -14,7 +14,7 @@ Sign in to FlaskTaskr · FlaskTaskr
   {{ form.csrf_token }}
   <div class="form-group">
     <label for="name">Username</label>
-    {{ form.name(placeholder="", class_="form-control col-md-3", id="name", required="required") }}
+    {{ form.name(placeholder="", class_="form-control col-md-4", id="name", required="required") }}
     {% if form.name.errors %}
     <div class="invalid-feedback">
       {% for error in form.name.errors %}
@@ -25,7 +25,7 @@ Sign in to FlaskTaskr · FlaskTaskr
   </div>
   <div class="form-group">
     <label for="password">Password</label>
-    {{ form.password(placeholder="", class_="form-control col-md-3", id="password", required="required") }}
+    {{ form.password(placeholder="", class_="form-control col-md-4", id="password", required="required") }}
     {% if form.password.errors %}
     <div class="invalid-feedback">
       {% for error in form.password.errors %}
@@ -37,7 +37,7 @@ Sign in to FlaskTaskr · FlaskTaskr
   <button class="btn btn-primary" type="submit">Sign in</button>
   <small id="formHelpBlock" class="form-text text-muted">
     <em>Need an account? </em><a href="/register">Sign up</a>.
-  </div>
+  </small>
 </form>
 
 {% endblock %}
