@@ -10,3 +10,4 @@ project/test.db
 .coverage
 cover
 error.log
+.vscode
