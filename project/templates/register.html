@@ -1,58 +1,66 @@
 {% extends "_base.html" %}
+
+{% block title %}
+
+Join FlaskTaskr · FlaskTaskr
+
+{% endblock %}
+
+
 {% block content %}
 
-  <h2>Welcome to FlaskTaskr.</h2>
-  <h3 class="font-weight-normal">Please register to access the task list.</h3>
-  <div class="half-width">
-    <form method="POST" action="">
-      {{ form.csrf_token }}
-      <div class="form-group">
-        {{ form.name(placeholder="name", class_="form-control col-md-3", id="name", required="required") }}
-        {% if form.name.errors %}
-        <div class="invalid-feedback">
-          {% for error in form.name.errors %}
-            {{error}}
-          {% endfor %}
-        </div>
-        {% endif %}
-      </div>
-      <div class="form-group">
-        {{ form.email(placeholder="email", class_="form-control col-md-3", id="email", required="required") }}
-        {% if form.email.errors %}
-        <div class="invalid-feedback">
-          {% for error in form.email.errors %}
-            {{error}}
-          {% endfor %}
-        </div>
-        {% endif %}
-      </div>
-      <div class="form-group">
-        {{ form.password(placeholder="password", class_="form-control col-md-3", id="password", required="required") }}
-        {% if form.password.errors %}
-        <div class="invalid-feedback">
-          {% for error in form.password.errors %}
-            {{error}}
-          {% endfor %}
-        </div>
-        {% endif %}
-      </div>
-      <div class="form-group">
-        {{ form.confirm(placeholder="confirm password", class_="form-control col-md-3", id="confirm", required="required") }}
-        {% if form.confirm.errors %}
-        <div class="invalid-feedback">
-          {% for error in form.confirm.errors %}
-            {{error}}
-          {% endfor %}
-        </div>
-        {% endif %}
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">Submit</button>
-      </div>
-      <small id="formHelpBlock" class="form-text text-muted">
-        <em>Already registered?</em> Click <a href="/">here</a> to login.
-      </small>
-    </form>
+<form method="POST" action="">
+  <h2>Join FlaskTaskr</h2>
+  <p class="lead">Create your personal account</p>
+  {{ form.csrf_token }}
+  <div class="form-group">
+    <label for="name">Username</label>
+    {{ form.name(placeholder="", class_="form-control col-md-3", id="name", required="required") }}
+    {% if form.name.errors %}
+    <div class="invalid-feedback">
+      {% for error in form.name.errors %}
+        {{error}}
+      {% endfor %}
+    </div>
+    {% endif %}
   </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    {{ form.email(placeholder="", class_="form-control col-md-3", id="email", required="required") }}
+    {% if form.email.errors %}
+    <div class="invalid-feedback">
+      {% for error in form.email.errors %}
+        {{error}}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    {{ form.password(placeholder="", class_="form-control col-md-3", id="password", required="required") }}
+    {% if form.password.errors %}
+    <div class="invalid-feedback">
+      {% for error in form.password.errors %}
+        {{error}}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  <div class="form-group">
+    <label for="confirm">Confirm your password</label>
+    {{ form.confirm(placeholder="", class_="form-control col-md-3", id="confirm", required="required") }}
+    {% if form.confirm.errors %}
+    <div class="invalid-feedback">
+      {% for error in form.confirm.errors %}
+        {{error}}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  <button class="btn btn-primary" type="submit">Create an account</button>
+  <small id="formHelpBlock" class="form-text text-muted">
+    <em>Already registered?</em> Click <a href="/">here to sign in</a>.
+  </small>
+</form>
 
 {% endblock %}

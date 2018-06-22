@@ -1,38 +1,43 @@
 {% extends "_base.html" %}
+
+{% block title %}
+
+Sign in to FlaskTaskr · FlaskTaskr
+
+{% endblock %}
+
 {% block content %}
 
-  <h2>Welcome to FlaskTaskr.</h2>
-  <h3 class="font-weight-normal">Please login to access your task list.</h3>
-  <!-- <div class="half-width"> -->
-    <form method="post" action="/">
-      {{ form.csrf_token }}
-      <div class="form-group">
-        {{ form.name(placeholder="name", class_="form-control col-md-3", id="name", required="required") }}
-        {% if form.name.errors %}
-        <div class="invalid-feedback">
-          {% for error in form.name.errors %}
-            {{error}}
-          {% endfor %}
-        </div>
-        {% endif %}
-      </div>
-      <div class="form-group">
-        {{ form.password(placeholder="password", class_="form-control col-md-3", id="password", required="required") }}
-        {% if form.password.errors %}
-        <div class="invalid-feedback">
-          {% for error in form.password.errors %}
-            {{error}}
-          {% endfor %}
-        </div>
-        {% endif %}
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" type="submit">Submit</button>
-      </div>
-      <small id="formHelpBlock" class="form-text text-muted">
-        <em>Need an account? </em><a href="/register">Signup.</a>
-      </div>
-    </form>
-  <!-- </div> -->
+<form method="post" action="/">
+  <h2>Welcome to FlaskTaskr</h2>
+  <p class="lead">Sign in to access your task list</p>
+  {{ form.csrf_token }}
+  <div class="form-group">
+    <label for="name">Username</label>
+    {{ form.name(placeholder="", class_="form-control col-md-3", id="name", required="required") }}
+    {% if form.name.errors %}
+    <div class="invalid-feedback">
+      {% for error in form.name.errors %}
+        {{error}}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    {{ form.password(placeholder="", class_="form-control col-md-3", id="password", required="required") }}
+    {% if form.password.errors %}
+    <div class="invalid-feedback">
+      {% for error in form.password.errors %}
+        {{error}}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  <button class="btn btn-primary" type="submit">Sign in</button>
+  <small id="formHelpBlock" class="form-text text-muted">
+    <em>Need an account? </em><a href="/register">Sign up</a>.
+  </div>
+</form>
 
 {% endblock %}
