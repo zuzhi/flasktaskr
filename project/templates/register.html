@@ -9,7 +9,7 @@ Join FlaskTaskr · FlaskTaskr
 
 {% block content %}
 
-<form method="POST" action="">
+<form method="POST" action="" novalidate>
   <h2>Join FlaskTaskr</h2>
   <p class="lead">Create your personal account</p>
   {{ form.csrf_token }}
@@ -17,7 +17,7 @@ Join FlaskTaskr · FlaskTaskr
     <label for="name">Username</label>
     {{ form.name(placeholder="", class_="form-control col-md-4", id="name", required="required") }}
     {% if form.name.errors %}
-    <div class="invalid-feedback">
+    <div class="invalid-feedback d-block">
       {% for error in form.name.errors %}
         {{error}}
       {% endfor %}
@@ -28,7 +28,7 @@ Join FlaskTaskr · FlaskTaskr
     <label for="email">Email</label>
     {{ form.email(placeholder="", class_="form-control col-md-4", id="email", required="required") }}
     {% if form.email.errors %}
-    <div class="invalid-feedback">
+    <div class="invalid-feedback d-block">
       {% for error in form.email.errors %}
         {{error}}
       {% endfor %}
@@ -39,7 +39,7 @@ Join FlaskTaskr · FlaskTaskr
     <label for="password">Password</label>
     {{ form.password(placeholder="", class_="form-control col-md-4", id="password", required="required") }}
     {% if form.password.errors %}
-    <div class="invalid-feedback">
+    <div class="invalid-feedback d-block">
       {% for error in form.password.errors %}
         {{error}}
       {% endfor %}
@@ -50,7 +50,7 @@ Join FlaskTaskr · FlaskTaskr
     <label for="confirm">Confirm your password</label>
     {{ form.confirm(placeholder="", class_="form-control col-md-4", id="confirm", required="required") }}
     {% if form.confirm.errors %}
-    <div class="invalid-feedback">
+    <div class="invalid-feedback d-block">
       {% for error in form.confirm.errors %}
         {{error}}
       {% endfor %}

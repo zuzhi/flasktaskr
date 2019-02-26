@@ -8,7 +8,7 @@ Sign in to FlaskTaskr · FlaskTaskr
 
 {% block content %}
 
-<form method="post" action="/">
+<form method="post" action="/" novalidate>
   <h2>Welcome to FlaskTaskr</h2>
   <p class="lead">Sign in to access your task list</p>
   {{ form.csrf_token }}
@@ -16,7 +16,7 @@ Sign in to FlaskTaskr · FlaskTaskr
     <label for="name">Username</label>
     {{ form.name(placeholder="", class_="form-control col-md-4", id="name", required="required") }}
     {% if form.name.errors %}
-    <div class="invalid-feedback">
+    <div class="invalid-feedback d-block">
       {% for error in form.name.errors %}
         {{error}}
       {% endfor %}
@@ -27,7 +27,7 @@ Sign in to FlaskTaskr · FlaskTaskr
     <label for="password">Password</label>
     {{ form.password(placeholder="", class_="form-control col-md-4", id="password", required="required") }}
     {% if form.password.errors %}
-    <div class="invalid-feedback">
+    <div class="invalid-feedback d-block">
       {% for error in form.password.errors %}
         {{error}}
       {% endfor %}
