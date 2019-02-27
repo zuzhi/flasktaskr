@@ -6,22 +6,40 @@ A Flask App
 
 ## Install
 
-* Virtualenv
-* Pip
+```bash
+# Create a virtual environment
+$ python3 -m venv venv
 
-## Run
+# Enable it
+$ source venv/bin/activate
+
+# Install dependencies
+$ pip install -r requirements.txt
+```
 
 ## Test
 
+```bash
+# Run tests
+$ nosetests -v
+```
+
+## Run
+
+```bash
+# Run with development server
+$ FLASK_APP=run.py FLASK_ENV=development flask run
+```
+
 ## Develop
 
-* Python Environment
-* DB
+- Python Environment
+- DB
 
 ## Deploy
 
-* Travis-CI
-* Heroku
+- Travis-CI
+- Heroku
 
 ## Some notes
 
@@ -31,6 +49,6 @@ Update heroku api_key
 $ travis setup heroku --force
 ```
 
-TODO
+## TODO
 
-* Update this README using https://github.com/pallets/flask/blob/master/examples/tutorial/README.rst as a reference.
+- Update this README using https://github.com/pallets/flask/blob/master/examples/tutorial/README.rst as a reference.

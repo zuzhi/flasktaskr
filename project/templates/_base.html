@@ -21,6 +21,7 @@
   <!-- styles -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/octicons.css') }}" rel="stylesheet">
 </head>
 <body>
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -68,7 +69,7 @@
     <div class="container">
       <hr>
       <p class="float-right">
-        <a href="https://github.com/zuzhi/flasktaskr">View on GitHub</a>
+        <a href="https://github.com/zuzhi/flasktaskr"><img class="octicon" src="{{ url_for('static', filename='img/mark-github.svg') }}" alt="mark-github-svg"> zuzhi/flasktaskr</a>
       </p>
       <p>&copy; <a href="https://github.com/zuzhi">zuzhi</a></p>
     </div>
